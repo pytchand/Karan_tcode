@@ -1,0 +1,90 @@
+step1:
+create a  project
+django-admin startproject proj_Test
+
+step 2:
+create an application
+manage.py startapp proj_app
+
+step3:
+------
+to install our application in settings.py file of the project
+
+	settings.py
+	-------------
+INSTALLED_APPS = [
+
+    'proj_app'
+]
+
+step4:
+-----
+to create a view in views.py file of the application
+
+	views.py
+	--------
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+
+# range of numbers
+
+#numbers_to_add=list(range(1000000001))
+#k=0
+
+# only 3 numbers
+numbers_to_add=[1,2,3]
+k=0
+
+def list_addition(request):
+    for i in numbers_to_add:
+         k=k+i 
+return HttpResponse(" range of numbers addition are :", str(k))
+ 
+step5:
+-----
+to configure the url pattern for our views in urls.py file
+
+	urls.py
+	------
+from django.contrib import admin
+from django.urls import path
+from proj_app import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('total/',views.list_addition)
+]
+
+
+step6:
+-----
+to apply the migrate for our applications(both builtin and userdefined)
+
+	python manage.py migrate
+
+step7:
+-----
+to start the server
+	
+	python manage.py runserver 5000
+
+step8:
+------
+to send request to the server
+
+	http://127.0.0.1:5000/total
+
+project structure:
+------------------
+	proj2
+	   |--->proj_Test
+
+	   |      |---> settings.py
+	   |      |---> urls.py
+           |--->proj_app
+	   |	  |---> views.py
+	   |--->manage.py
+
+
+
+
